@@ -2,7 +2,7 @@
 
 #include "catch.hpp"
 #include "wet2util_override.h"
-#include "your_files/worldcup23a2.h"
+#include "../your_files/worldcup23a2.h"
 
 TEST_CASE("insert and remove team")
 {
@@ -1498,7 +1498,7 @@ TEST_CASE("get team points")
         output_t<int> resn4 = obj->get_team_points(-1);
         REQUIRE(resn4.status() == StatusType::INVALID_INPUT);
         output_t<int> resn5 = obj->get_team_points(0);
-        REQUIRE(resn4.status() == StatusType::INVALID_INPUT);
+        REQUIRE(resn5.status() == StatusType::INVALID_INPUT);
 
         delete obj;
     }SECTION("get points no team with that id")
