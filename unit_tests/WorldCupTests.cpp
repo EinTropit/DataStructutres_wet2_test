@@ -1,7 +1,8 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "C:/Technion/Semester3/DataStructuresWet2/worldcup23a2.h"
+#include "wet2util_override.h"
+#include "your_files/worldcup23a2.h"
 
 TEST_CASE("insert and remove team")
 {
