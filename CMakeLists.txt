@@ -3,4 +3,4 @@ project(DS2_test)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(DS2_test catch.hpp WorldCupTests.cpp WorldCupTests2.cpp)
+add_executable(DS2_test catch.hpp WorldCupTests.cpp)
