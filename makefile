@@ -1,10 +1,10 @@
 GPP=g++
 DEBUG_FLAG= -g # can add -g
 CFLAGS= --std=c++11 -Wall -Werror -pedantic-errors $(DEBUG_FLAG)
-O_FILES_DIR=$(TESTS_DIR)/OFiles
+O_FILES_DIR=./OFiles
 
 TESTS_INCLUDED_FILE=worldcup23a1.h ./catch.hpp
-SOURCES=$(wildcard *.c )
+SOURCES=$(wildcard *.cpp )
 OBJECTS=$(O_FILES_DIR)/$(SOURCES:.c=.o)
 EXEC=WorldCupUnitTester
 
