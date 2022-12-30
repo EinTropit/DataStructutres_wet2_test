@@ -2122,10 +2122,10 @@ TEST_CASE("get_partial_spirit")
         REQUIRE(res == StatusType::SUCCESS);
         output_t<permutation_t> res1 = obj->get_partial_spirit(1001);
         REQUIRE(res1.status() == StatusType::SUCCESS);
-        REQUIRE((res1.ans() * permutation_t::read("4,5,3,1,2").inv()).strength() == 55);
+        REQUIRE(res1.ans() == permutation_t::read("4,5,3,1,2"));
         output_t<permutation_t> res2 = obj->get_partial_spirit(1002);
         REQUIRE(res2.status() == StatusType::SUCCESS);
-        REQUIRE((res2.ans() * permutation_t::read("5,1,3,4,2").inv()).strength() == 55);
+        REQUIRE(res2.ans() == permutation_t::read("5,1,3,4,2"));
 
 
         delete obj;
@@ -2243,43 +2243,43 @@ TEST_CASE("get_partial_spirit")
 
         output_t<permutation_t> res1 = obj->get_partial_spirit(1001);
         REQUIRE(res1.status() == StatusType::SUCCESS);
-        REQUIRE((res1.ans() * permutation_t::read("4,5,3,1,2").inv()).strength() == 55);
+        REQUIRE(res1.ans() == permutation_t::read("4,5,3,1,2"));
         output_t<permutation_t> res2 = obj->get_partial_spirit(1002);
         REQUIRE(res2.status() == StatusType::SUCCESS);
-        REQUIRE((res2.ans() * permutation_t::read("3,5,2,4,1").inv()).strength() == 55);
+        REQUIRE(res2.ans() == permutation_t::read("3,5,2,4,1"));
         output_t<permutation_t> res3 = obj->get_partial_spirit(1003);
         REQUIRE(res3.status() == StatusType::SUCCESS);
-        REQUIRE((res3.ans() * permutation_t::read("3,4,2,5,1").inv()).strength() == 55);
+        REQUIRE(res3.ans() == permutation_t::read("3,4,2,5,1"));
         output_t<permutation_t> res4 = obj->get_partial_spirit(1004);
         REQUIRE(res4.status() == StatusType::SUCCESS);
-        REQUIRE((res4.ans() * permutation_t::read("1,5,3,4,2").inv()).strength() == 55);
+        REQUIRE(res4.ans() == permutation_t::read("1,5,3,4,2"));
         output_t<permutation_t> res5 = obj->get_partial_spirit(1005);
         REQUIRE(res5.status() == StatusType::SUCCESS);
-        REQUIRE((res5.ans() * permutation_t::read("5,1,3,4,2").inv()).strength() == 55);
+        REQUIRE(res5.ans() == permutation_t::read("5,1,3,4,2"));
         output_t<permutation_t> res6 = obj->get_partial_spirit(1006);
         REQUIRE(res6.status() == StatusType::SUCCESS);
-        REQUIRE((res6.ans() * permutation_t::read("1,3,2,5,4").inv()).strength() == 55);
+        REQUIRE(res6.ans() == permutation_t::read("1,3,2,5,4"));
         output_t<permutation_t> res7 = obj->get_partial_spirit(1007);
         REQUIRE(res7.status() == StatusType::SUCCESS);
-        REQUIRE((res7.ans() * permutation_t::read("5,2,1,3,4").inv()).strength() == 55);
+        REQUIRE(res7.ans() == permutation_t::read("5,2,1,3,4"));
         output_t<permutation_t> res8 = obj->get_partial_spirit(1008);
         REQUIRE(res8.status() == StatusType::SUCCESS);
-        REQUIRE((res8.ans() * permutation_t::read("3,5,4,2,1").inv()).strength() == 55);
+        REQUIRE(res8.ans() == permutation_t::read("3,5,4,2,1"));
         output_t<permutation_t> res9 = obj->get_partial_spirit(1009);
         REQUIRE(res9.status() == StatusType::SUCCESS);
-        REQUIRE((res9.ans() * permutation_t::read("1,4,5,2,3").inv()).strength() == 55);
+        REQUIRE(res9.ans() == permutation_t::read("1,4,5,2,3"));
         output_t<permutation_t> res10 = obj->get_partial_spirit(1010);
         REQUIRE(res10.status() == StatusType::SUCCESS);
-        REQUIRE((res10.ans() * permutation_t::read("3,2,5,1,4").inv()).strength() == 55);
+        REQUIRE(res10.ans() == permutation_t::read("3,2,5,1,4"));
         output_t<permutation_t> res11 = obj->get_partial_spirit(1011);
         REQUIRE(res11.status() == StatusType::SUCCESS);
-        REQUIRE((res11.ans() * permutation_t::read("1,3,2,5,4").inv()).strength() == 55);
+        REQUIRE(res11.ans() == permutation_t::read("1,3,2,5,4"));
         output_t<permutation_t> res12 = obj->get_partial_spirit(1012);
         REQUIRE(res12.status() == StatusType::SUCCESS);
-        REQUIRE((res12.ans() * permutation_t::read("3,4,5,1,2").inv()).strength() == 55);
+        REQUIRE(res12.ans() == permutation_t::read("3,4,5,1,2"));
         output_t<permutation_t> res13 = obj->get_partial_spirit(1013);
         REQUIRE(res13.status() == StatusType::SUCCESS);
-        REQUIRE((res13.ans() * permutation_t::read("5,4,1,3,2").inv()).strength() == 55);
+        REQUIRE(res13.ans() == permutation_t::read("5,4,1,3,2"));
 
 
         delete obj;
@@ -2892,29 +2892,29 @@ TEST_CASE("buy_team")
 
         output_t<permutation_t> res14 = obj->get_partial_spirit(1001);
         REQUIRE(res14.status() == StatusType::SUCCESS);
-        REQUIRE((res14.ans() * permutation_t::read("2,3,5,4,1").inv()).strength() == 55);
+        REQUIRE(res14.ans() == permutation_t::read("2,3,5,4,1"));
         output_t<permutation_t> res15 = obj->get_partial_spirit(2001);
         REQUIRE(res15.status() == StatusType::SUCCESS);
-        REQUIRE((res15.ans() * permutation_t::read("4,2,1,5,3").inv()).strength() == 55);
+        REQUIRE(res15.ans() == permutation_t::read("4,2,1,5,3"));
         output_t<permutation_t> res16 = obj->get_partial_spirit(3001);
         REQUIRE(res16.status() == StatusType::SUCCESS);
-        REQUIRE((res16.ans() * permutation_t::read("5,4,3,2,1").inv()).strength() == 55);
+        REQUIRE(res16.ans() == permutation_t::read("5,4,3,2,1"));
         output_t<permutation_t> res17 = obj->get_partial_spirit(4002);
         REQUIRE(res17.status() == StatusType::SUCCESS);
-        REQUIRE((res17.ans() * permutation_t::read("1,5,2,4,3").inv()).strength() == 55);
+        REQUIRE(res17.ans() == permutation_t::read("1,5,2,4,3"));
         output_t<permutation_t> res18 = obj->get_partial_spirit(5001);
         REQUIRE(res18.status() == StatusType::SUCCESS);
-        REQUIRE(res18.ans().strength() == 55);
+        REQUIRE(res18.ans() == permutation_t::neutral());
 
         res = obj->buy_team(1, 2);
         REQUIRE(res == StatusType::SUCCESS);
 
         output_t<permutation_t> res140 = obj->get_partial_spirit(1001);
         REQUIRE(res140.status() == StatusType::SUCCESS);
-        REQUIRE((res140.ans() * permutation_t::read("2,3,5,4,1").inv()).strength() == 55);
+        REQUIRE(res140.ans() == permutation_t::read("2,3,5,4,1"));
         output_t<permutation_t> res150 = obj->get_partial_spirit(2001);
         REQUIRE(res150.status() == StatusType::SUCCESS);
-        REQUIRE((res150.ans() * permutation_t::read("4,3,2,1,5").inv()).strength() == 55);
+        REQUIRE(res150.ans() == permutation_t::read("4,3,2,1,5"));
 
 
         res = obj->buy_team(3, 4);
@@ -2922,10 +2922,10 @@ TEST_CASE("buy_team")
 
         output_t<permutation_t> res161 = obj->get_partial_spirit(3001);
         REQUIRE(res161.status() == StatusType::SUCCESS);
-        REQUIRE((res161.ans() * permutation_t::read("5,4,3,2,1").inv()).strength() == 55);
+        REQUIRE(res161.ans() == permutation_t::read("5,4,3,2,1"));
         output_t<permutation_t> res171 = obj->get_partial_spirit(4002);
         REQUIRE(res171.status() == StatusType::SUCCESS);
-        REQUIRE((res171.ans() * permutation_t::read("5,1,4,2,3").inv()).strength() == 55);
+        REQUIRE(res171.ans() == permutation_t::read("5,1,4,2,3"));
 
 
 
@@ -2934,32 +2934,32 @@ TEST_CASE("buy_team")
 
         output_t<permutation_t> res162 = obj->get_partial_spirit(3001);
         REQUIRE(res162.status() == StatusType::SUCCESS);
-        REQUIRE((res162.ans() * permutation_t::read("5,4,3,2,1").inv()).strength() == 55);
+        REQUIRE(res162.ans() == permutation_t::read("5,4,3,2,1"));
         output_t<permutation_t> res172 = obj->get_partial_spirit(4002);
         REQUIRE(res172.status() == StatusType::SUCCESS);
-        REQUIRE((res172.ans() * permutation_t::read("5,1,4,2,3").inv()).strength() == 55);
+        REQUIRE(res172.ans() == permutation_t::read("5,1,4,2,3"));
         output_t<permutation_t> res182 = obj->get_partial_spirit(5001);
         REQUIRE(res182.status() == StatusType::SUCCESS);
-        REQUIRE((res182.ans() * permutation_t::read("5,1,4,2,3").inv()).strength() == 55);
+        REQUIRE(res182.ans() == permutation_t::read("5,1,4,2,3"));
 
         res = obj->buy_team(3, 1);
         REQUIRE(res == StatusType::SUCCESS);
 
         output_t<permutation_t> res143 = obj->get_partial_spirit(1001);
         REQUIRE(res143.status() == StatusType::SUCCESS);
-        REQUIRE((res143.ans() * permutation_t::read("1,4,3,2,5").inv()).strength() == 55);
+        REQUIRE(res143.ans() == permutation_t::read("1,4,3,2,5"));
         output_t<permutation_t> res153 = obj->get_partial_spirit(2001);
         REQUIRE(res153.status() == StatusType::SUCCESS);
-        REQUIRE((res153.ans() * permutation_t::read("2,4,1,5,3").inv()).strength() == 55);
+        REQUIRE(res153.ans() == permutation_t::read("2,4,1,5,3"));
         output_t<permutation_t> res163 = obj->get_partial_spirit(3001);
         REQUIRE(res163.status() == StatusType::SUCCESS);
-        REQUIRE((res163.ans() * permutation_t::read("5,4,3,2,1").inv()).strength() == 55);
+        REQUIRE(res163.ans() == permutation_t::read("5,4,3,2,1"));
         output_t<permutation_t> res173 = obj->get_partial_spirit(4002);
         REQUIRE(res173.status() == StatusType::SUCCESS);
-        REQUIRE((res173.ans() * permutation_t::read("5,1,4,2,3").inv()).strength() == 55);
+        REQUIRE(res173.ans() == permutation_t::read("5,1,4,2,3").inv());
         output_t<permutation_t> res183 = obj->get_partial_spirit(5001);
         REQUIRE(res183.status() == StatusType::SUCCESS);
-        REQUIRE((res183.ans() * permutation_t::read("5,1,4,2,3").inv()).strength() == 55);
+        REQUIRE(res183.ans() == permutation_t::read("5,1,4,2,3"));
 
 
         delete obj;
