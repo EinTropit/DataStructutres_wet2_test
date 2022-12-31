@@ -3,12 +3,19 @@
 #include "catch.hpp"
 #include "wet2util_override.h"
 #include "../your_files/worldcup23a2.h"
+#include <string>
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <stdlib.h>
+
+using namespace std;
 
 TEST_CASE("insert and remove team")
 {
     SECTION("simple add and remove")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->remove_team(1);
@@ -19,7 +26,7 @@ TEST_CASE("insert and remove team")
 
     SECTION("invalid input")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(0);
         REQUIRE(res == StatusType::INVALID_INPUT);
 
@@ -28,7 +35,7 @@ TEST_CASE("insert and remove team")
 
     SECTION("add existing")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_team(1);
@@ -39,7 +46,7 @@ TEST_CASE("insert and remove team")
 
     SECTION("remove then add")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->remove_team(1);
@@ -52,7 +59,7 @@ TEST_CASE("insert and remove team")
 
     SECTION("add and remove a lot")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res;
         for (int i = 1; i < 100; i++)
         {
@@ -75,7 +82,7 @@ TEST_CASE("insert and remove team")
 
     SECTION("add negative id")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(-1);
         REQUIRE(res == StatusType::INVALID_INPUT);
 
@@ -84,7 +91,7 @@ TEST_CASE("insert and remove team")
 
     SECTION("remove team that doesnt exist")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->remove_team(5);
         REQUIRE(res == StatusType::FAILURE);
 
@@ -93,7 +100,7 @@ TEST_CASE("insert and remove team")
 
     SECTION("remove team that doesnt exist but another team exists")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->remove_team(5);
@@ -104,7 +111,7 @@ TEST_CASE("insert and remove team")
 
     SECTION("remove negative id but another team exists")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(5);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->remove_team(-4);
@@ -115,7 +122,7 @@ TEST_CASE("insert and remove team")
 
     SECTION("remove 0 id but another team exists")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(5);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->remove_team(0);
@@ -126,7 +133,7 @@ TEST_CASE("insert and remove team")
 
     SECTION("remove negative id no team exists")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->remove_team(-4);
         REQUIRE(res == StatusType::INVALID_INPUT);
 
@@ -135,7 +142,7 @@ TEST_CASE("insert and remove team")
 
     SECTION("remove 0 id no team exists")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->remove_team(0);
         REQUIRE(res == StatusType::INVALID_INPUT);
 
@@ -144,7 +151,7 @@ TEST_CASE("insert and remove team")
 
     SECTION("remove team twice")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->remove_team(1);
@@ -160,7 +167,7 @@ TEST_CASE("Add player")
 {
     SECTION("simple add player")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 3, 3, 3, false);
@@ -171,7 +178,7 @@ TEST_CASE("Add player")
 
     SECTION("simple add goal keeper player")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(2);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 2, permutation_t::neutral(), 3, 3, 3, true);
@@ -182,7 +189,7 @@ TEST_CASE("Add player")
 
     SECTION("add player with negative id")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(2);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(-1, 2, permutation_t::neutral(), 3, 3, 3, true);
@@ -193,7 +200,7 @@ TEST_CASE("Add player")
 
     SECTION("add player with negative team id")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(2);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, -2, permutation_t::neutral(), 3, 3, 3, true);
@@ -204,7 +211,7 @@ TEST_CASE("Add player")
 
     SECTION("add player with invalid spirit")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(2);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 2, permutation_t::invalid(), 3, 3, 3, true);
@@ -215,7 +222,7 @@ TEST_CASE("Add player")
 
     SECTION("add player with negative games")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(2);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 2, permutation_t::neutral(), -3, 3, 3, true);
@@ -226,7 +233,7 @@ TEST_CASE("Add player")
 
     SECTION("add player with 0 id")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(2);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(0, 2, permutation_t::neutral(), 3, 3, 3, true);
@@ -237,7 +244,7 @@ TEST_CASE("Add player")
 
     SECTION("add player with 0 team id")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 0, permutation_t::neutral(), 3, 3, 3, true);
@@ -248,7 +255,7 @@ TEST_CASE("Add player")
 
     SECTION("add player with negative cards")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 2, permutation_t::neutral(), 3, 3, -3, true);
@@ -259,10 +266,10 @@ TEST_CASE("Add player")
 
     SECTION("add player with negative ability")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(1, 2, permutation_t::neutral(), 0, -5, 0, true);
+        res = obj->add_player(1, 1, permutation_t::neutral(), 0, -5, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
 
         delete obj;
@@ -270,10 +277,10 @@ TEST_CASE("Add player")
 
     SECTION("add player with 0 ability")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(1, 2, permutation_t::neutral(), 0, 0, 3, true);
+        res = obj->add_player(1, 1, permutation_t::neutral(), 0, 0, 3, true);
         REQUIRE(res == StatusType::SUCCESS);
 
         delete obj;
@@ -281,7 +288,7 @@ TEST_CASE("Add player")
 
     SECTION("add player with 0 id and 0 team id")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(0, 0, permutation_t::neutral(), 3, 3, 3, true);
@@ -292,7 +299,7 @@ TEST_CASE("Add player")
 
     SECTION("add player with many zeroes")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(0, 2, permutation_t::neutral(), 0, 0, 0, true);
@@ -303,7 +310,7 @@ TEST_CASE("Add player")
 
     SECTION("add player with zero all")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(0, 0, permutation_t::neutral(), 0, 0, 0, true);
@@ -314,7 +321,7 @@ TEST_CASE("Add player")
 
     SECTION("add player that exists")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 3, 3, 3, true);
@@ -327,7 +334,7 @@ TEST_CASE("Add player")
 
     SECTION("add player with team that doesn't exist")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 3, 3, 3, true);
@@ -340,7 +347,7 @@ TEST_CASE("Add player")
 
     SECTION("add player to two different teams")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_team(2);
@@ -355,7 +362,7 @@ TEST_CASE("Add player")
 
     SECTION("add existing player that has no team")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_team(2);
@@ -372,7 +379,7 @@ TEST_CASE("Add player")
 
     SECTION("add player to removed team")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->remove_team(1);
@@ -385,7 +392,7 @@ TEST_CASE("Add player")
 
     SECTION("add teams and players - segel test from wet1")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_team(2);
@@ -475,7 +482,7 @@ TEST_CASE("Add player")
 
     SECTION("add teams and players with random team remove")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_team(2);
@@ -527,7 +534,7 @@ TEST_CASE("Add player")
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(2009, 2, permutation_t::neutral(), 20, 0, 0, false);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->remove_team(3);
+        res = obj->remove_team(2);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(2010, 2, permutation_t::neutral(), 0, 0, 0, false);
         REQUIRE(res == StatusType::FAILURE);
@@ -576,7 +583,7 @@ TEST_CASE("Add player")
 
     SECTION("add teams and players with random team remove")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1001, 1, permutation_t::neutral(), 10, 0, 0, false);
@@ -596,7 +603,7 @@ TEST_CASE("Add player")
         res = obj->add_player(1006, 1, permutation_t::neutral(), 10, 4, 3, false);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->remove_team(1);
-        REQUIRE(res == StatusType::FAILURE);
+        REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1007, 1, permutation_t::neutral(), 10, 0, 0, false);
         REQUIRE(res == StatusType::FAILURE);
         res = obj->add_team(1);
@@ -620,7 +627,7 @@ TEST_CASE("play_match")
 {
     SECTION("simple play_match")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -653,7 +660,7 @@ TEST_CASE("play_match")
 
     SECTION("play_match invalid input")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         output_t<int> res1 = obj->play_match(0, 1);
         REQUIRE(res1.status() == StatusType::INVALID_INPUT);
@@ -675,7 +682,7 @@ TEST_CASE("play_match")
 
     SECTION("play_match no goal keepers")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -705,7 +712,7 @@ TEST_CASE("play_match")
 
     SECTION("play_match goal keepers only on one")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -730,7 +737,7 @@ TEST_CASE("play_match")
 
     SECTION("play_match extra failure")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         output_t<int> res1 = obj->play_match(1, 2);
         REQUIRE(res1.status() == StatusType::FAILURE);
@@ -793,14 +800,15 @@ TEST_CASE("play_match")
         output_t<int> res9 = obj->play_match(1, 2);
         REQUIRE(res9.status() == StatusType::FAILURE);
         res = obj->add_player(2007, 2, permutation_t::neutral(), 1, 1, 1, false);
-        REQUIRE(res == StatusType::FAILURE);
-
+        REQUIRE(res == StatusType::SUCCESS);
+        output_t<int> res9p = obj->play_match(1, 2);
+        REQUIRE(res9p.status() == StatusType::FAILURE);
         delete obj;
     }
 
     SECTION("play_match success returns")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -815,34 +823,36 @@ TEST_CASE("play_match")
         output_t<int> res1 = obj->play_match(1, 2);
         REQUIRE(res1.status() == StatusType::SUCCESS);
         REQUIRE(res1.ans() == 1); // 5|1
-
+        // score now 3:0
         res = obj->add_player(2002, 2, permutation_t::neutral(), 1, 10, 1, true);
         REQUIRE(res == StatusType::SUCCESS);
 
         output_t<int> res2 = obj->play_match(1, 2);
         REQUIRE(res2.status() == StatusType::SUCCESS);
         REQUIRE(res2.ans() == 3); // 8|11
+        //score now 3:3
 
         res = obj->add_player(1002, 1, permutation_t::neutral(), 1, 6, 1, true);
         REQUIRE(res == StatusType::SUCCESS);
 
         output_t<int> res3 = obj->play_match(1, 2);
         REQUIRE(res3.status() == StatusType::SUCCESS);
-        REQUIRE(res3.ans() == 0);// 11|11
+        REQUIRE(res3.ans() == 0);// 14|14
+        //score now 4:4
 
         res = obj->add_player(1003, 1, permutation_t::neutral(), 1, 5, 1, true);
         REQUIRE(res == StatusType::SUCCESS);
 
         output_t<int> res4 = obj->play_match(2, 1);
         REQUIRE(res4.status() == StatusType::SUCCESS);
-        REQUIRE(res4.ans() == 3);// 12|17
-
+        REQUIRE(res4.ans() == 3);// 20|15
+        //score now 23:15
         res = obj->add_player(2003, 2, permutation_t::neutral(), 1, 10, 1, true);
         REQUIRE(res == StatusType::SUCCESS);
 
-        output_t<int> res5 = obj->play_match(2, 1);
+        output_t<int> res5 = obj->play_match(2, 1); //
         REQUIRE(res5.status() == StatusType::SUCCESS);
-        REQUIRE(res5.ans() == 1);// 22|20
+        REQUIRE(res5.ans() == 1);// 23|25
 
         res = obj->add_player(1004, 1, permutation_t::neutral(), 1, 5, 1, true);
         REQUIRE(res == StatusType::SUCCESS);
@@ -852,23 +862,26 @@ TEST_CASE("play_match")
         REQUIRE(res6.ans() == 0);// 25|25
 
         res = obj->add_player(1005, 1, permutation_t::read("2,3,4,5,1"), 1, 0, 1, true);
-        REQUIRE(res == StatusType::SUCCESS);
+        REQUIRE(res == StatusType::SUCCESS); 
 
         output_t<int> res7 = obj->play_match(1, 2);
         REQUIRE(res7.status() == StatusType::SUCCESS);
         REQUIRE(res7.ans() == 4);// 26|26 -> str[45|55]
 
-
-        res = obj->add_player(2004, 2, permutation_t::read("4,3,5,2,1"), 1, 3, 1, true);
+        res = obj->add_player(1104, 1, permutation_t::neutral(), 1, 3, 1, true);
+        res = obj->add_player(2004, 2, permutation_t::read("4,3,5,2,1"), 1, 0, 1, true);
         REQUIRE(res == StatusType::SUCCESS);
 
         output_t<int> res8 = obj->play_match(1, 2);
         REQUIRE(res8.status() == StatusType::SUCCESS);
         REQUIRE(res8.ans() == 2);// 29|29 -> str[45|38]
 
-        res = obj->add_player(1006, 1, permutation_t::read("4,3,5,2,1"), 1, 3, 1, true);
+        res = obj->add_player(1300, 1, permutation_t::read("5,1,2,3,4"), 1, 0, 1, true); //to neutral
         REQUIRE(res == StatusType::SUCCESS);
-
+        res = obj->add_player(1006, 1, permutation_t::read("4,3,5,2,1"), 1, 3, 1, true);
+        REQUIRE(res == StatusType::SUCCESS); 
+        res = obj->add_player(2300, 2, permutation_t::read("1,2,3,4,5"), 1, 6, 1, true);
+        REQUIRE(res == StatusType::SUCCESS);
         output_t<int> res9 = obj->play_match(2, 1);
         REQUIRE(res9.status() == StatusType::SUCCESS);
         REQUIRE(res9.ans() == 0);// 32|32 -> str[38|38]
@@ -897,7 +910,7 @@ TEST_CASE("num_played_games_for_player")
 {
     SECTION("simple get played")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -914,7 +927,7 @@ TEST_CASE("num_played_games_for_player")
 
     SECTION("simple get played 2")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -931,7 +944,7 @@ TEST_CASE("num_played_games_for_player")
 
     SECTION("get num played for non exist player")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -947,7 +960,7 @@ TEST_CASE("num_played_games_for_player")
 
     SECTION("get num played for non exist player2")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         output_t<int> res1 = obj->num_played_games_for_player(1003);
         REQUIRE(res1.status() == StatusType::FAILURE);
 
@@ -956,7 +969,7 @@ TEST_CASE("num_played_games_for_player")
 
     SECTION("get_num_played for negative player id")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         output_t<int> res1 = obj->num_played_games_for_player(-1);
         REQUIRE(res1.status() == StatusType::INVALID_INPUT);
 
@@ -965,7 +978,7 @@ TEST_CASE("num_played_games_for_player")
 
     SECTION("get_num_played for 0 player id")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         output_t<int> res1 = obj->num_played_games_for_player(0);
         REQUIRE(res1.status() == StatusType::INVALID_INPUT);
 
@@ -974,7 +987,7 @@ TEST_CASE("num_played_games_for_player")
 
     SECTION("segel test from wet1")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_team(2);
@@ -1096,7 +1109,7 @@ TEST_CASE("num_played_games_for_player")
 
     SECTION("simple get_num_played after a match")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -1128,7 +1141,7 @@ TEST_CASE("num_played_games_for_player")
 
     SECTION("complex get_num_played after a match")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -1197,7 +1210,7 @@ TEST_CASE("add and get cards")
 {
     SECTION("simple add cards")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1210,7 +1223,7 @@ TEST_CASE("add and get cards")
 
     SECTION("add cards bad id")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1225,7 +1238,7 @@ TEST_CASE("add and get cards")
 
     SECTION("add cards bad cards")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1240,7 +1253,7 @@ TEST_CASE("add and get cards")
 
     SECTION("add cards bad cards and id")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1253,7 +1266,7 @@ TEST_CASE("add and get cards")
 
     SECTION("add cards player never existed")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(2, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1266,7 +1279,7 @@ TEST_CASE("add and get cards")
 
     SECTION("add cards player never existed +invalid input")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(2, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1279,7 +1292,7 @@ TEST_CASE("add and get cards")
 
     SECTION("add cards player taken out of tournament")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1294,7 +1307,7 @@ TEST_CASE("add and get cards")
 
     SECTION("add cards player taken out of tournament + bad input")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1309,7 +1322,7 @@ TEST_CASE("add and get cards")
 
     SECTION("simple get cards")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1323,7 +1336,7 @@ TEST_CASE("add and get cards")
 
     SECTION("get cards bad id")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1338,7 +1351,7 @@ TEST_CASE("add and get cards")
 
     SECTION("get cards player never existed")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(2, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1351,7 +1364,7 @@ TEST_CASE("add and get cards")
 
     SECTION("add cards player never existed +invalid input")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(2, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1366,7 +1379,7 @@ TEST_CASE("add and get cards")
 
     SECTION("get cards player taken out of tournament")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1382,7 +1395,7 @@ TEST_CASE("add and get cards")
 
     SECTION("add cards player taken out of tournament + bad input")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1397,7 +1410,7 @@ TEST_CASE("add and get cards")
 
     SECTION("get cards player taken out of tournament but add beforehand")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1415,7 +1428,7 @@ TEST_CASE("add and get cards")
 
     SECTION("get cards after recurring addition and kicking player")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);
@@ -1443,7 +1456,7 @@ TEST_CASE("get team points")
 {
     SECTION("simple get points for new team")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         output_t<int> resn4 = obj->get_team_points(1);
@@ -1455,12 +1468,12 @@ TEST_CASE("get team points")
 
     SECTION("simple get points after match")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 20; ++i)
         {
-            StatusType res1 = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(i+1000, 1, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
 
         }
@@ -1468,7 +1481,7 @@ TEST_CASE("get team points")
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 30; ++i)
         {
-            StatusType res1 = obj->add_player(1, 2, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(i+2000, 2, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
         output_t<int> resn02 = obj->get_team_points(2);
@@ -1492,7 +1505,7 @@ TEST_CASE("get team points")
 
     SECTION("get points invalid input")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         output_t<int> resn4 = obj->get_team_points(-1);
@@ -1503,7 +1516,7 @@ TEST_CASE("get team points")
         delete obj;
     }SECTION("get points no team with that id")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         output_t<int> resn4 = obj->get_team_points(2);
         REQUIRE(resn4.status() == StatusType::FAILURE);
         StatusType res = obj->add_team(1);
@@ -1516,7 +1529,7 @@ TEST_CASE("get team points")
 
     SECTION("get points team with that id was removed")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         output_t<int> resn4 = obj->get_team_points(1);
@@ -1532,12 +1545,12 @@ TEST_CASE("get team points")
 
     SECTION("get points team with that id was removed then readded")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 30; ++i)
         {
-            StatusType res1 = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(1000+i, 1, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
 
         }
@@ -1545,7 +1558,7 @@ TEST_CASE("get team points")
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 10; ++i)
         {
-            StatusType res1 = obj->add_player(1, 2, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(2000+i, 2, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
         output_t<int> resnP = obj->play_match(1, 2);
@@ -1575,7 +1588,7 @@ TEST_CASE("get_ith_pointless_ability")
 {
     SECTION("simple get i")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -1588,7 +1601,7 @@ TEST_CASE("get_ith_pointless_ability")
         output_t<int> res1 = obj->get_ith_pointless_ability(0);
         REQUIRE(res1.status() == StatusType::SUCCESS);
         REQUIRE(res1.ans() == 1);
-        output_t<int> res2 = obj->num_played_games_for_player(1);
+        output_t<int> res2 = obj->get_ith_pointless_ability(1);
         REQUIRE(res2.status() == StatusType::SUCCESS);
         REQUIRE(res2.ans() == 2);
 
@@ -1597,7 +1610,7 @@ TEST_CASE("get_ith_pointless_ability")
 
     SECTION("no teams")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         output_t<int> res1 = obj->get_ith_pointless_ability(0);
         REQUIRE(res1.status() == StatusType::FAILURE);
@@ -1611,7 +1624,7 @@ TEST_CASE("get_ith_pointless_ability")
 
     SECTION("negative i")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -1634,7 +1647,7 @@ TEST_CASE("get_ith_pointless_ability")
         delete obj;
     }SECTION("i too big")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -1664,7 +1677,7 @@ TEST_CASE("get_ith_pointless_ability")
 
     SECTION("no players")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(2);
         REQUIRE(res == StatusType::SUCCESS);
@@ -1715,7 +1728,7 @@ TEST_CASE("get_ith_pointless_ability")
 
     SECTION("with players")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -1781,7 +1794,7 @@ TEST_CASE("get_ith_pointless_ability")
 
     SECTION("more points less ability")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -1852,12 +1865,12 @@ TEST_CASE("get_ith_pointless_ability")
 
     SECTION("get ith but some teams are removed")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(5);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 10; ++i)
         {
-            StatusType res1 = obj->add_player(1, 5, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(5000+i, 5, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
 
         }
@@ -1865,28 +1878,28 @@ TEST_CASE("get_ith_pointless_ability")
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 20; ++i)
         {
-            StatusType res1 = obj->add_player(1, 4, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(4000+i, 4, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
         res = obj->add_team(3);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 30; ++i)
         {
-            StatusType res1 = obj->add_player(1, 3, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(3000+i, 3, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
         res = obj->add_team(2);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 40; ++i)
         {
-            StatusType res1 = obj->add_player(1, 2, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(2000+i, 2, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
         res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 50; ++i)
         {
-            StatusType res1 = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(1000+i, 1, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
         output_t<int> res0 = obj->get_ith_pointless_ability(0);
@@ -1933,12 +1946,12 @@ TEST_CASE("get_ith_pointless_ability")
 
     SECTION("some teams are removed then readded")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(5);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 10; ++i)
         {
-            StatusType res1 = obj->add_player(1, 5, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(5000+i, 5, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
 
         }
@@ -1946,28 +1959,28 @@ TEST_CASE("get_ith_pointless_ability")
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 20; ++i)
         {
-            StatusType res1 = obj->add_player(1, 4, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(4000+i, 4, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
         res = obj->add_team(3);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 30; ++i)
         {
-            StatusType res1 = obj->add_player(1, 3, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(3000+i, 3, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
         res = obj->add_team(2);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 40; ++i)
         {
-            StatusType res1 = obj->add_player(1, 2, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(2000+i, 2, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
         res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 50; ++i)
         {
-            StatusType res1 = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(i, 1, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
         output_t<int> res0 = obj->get_ith_pointless_ability(0);
@@ -2011,17 +2024,21 @@ TEST_CASE("get_ith_pointless_ability")
 
         res = obj->add_team(2);
         REQUIRE(res == StatusType::SUCCESS);
-        for (int i = 1; i <= 70; ++i)
+        for (int i = 1; i <= 49; ++i)
         {
-            StatusType res1 = obj->add_player(1, 2, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(7000+i, 2, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
-
+        for (int i = 50; i <= 70; ++i)
+        {
+            StatusType res1 = obj->add_player(7000 + i, 2, permutation_t::neutral(), 1, 1, 1, true);;
+            REQUIRE(res1 == StatusType::SUCCESS);
+        }
         res = obj->add_team(4);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 5; ++i)
         {
-            StatusType res1 = obj->add_player(1, 4, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(8000+i, 4, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
 
@@ -2048,12 +2065,12 @@ TEST_CASE("get_ith_pointless_ability")
 
     SECTION("there is a tie")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(5);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 10; ++i)
         {
-            StatusType res1 = obj->add_player(1, 5, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(5000+i, 5, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
 
         }
@@ -2061,28 +2078,28 @@ TEST_CASE("get_ith_pointless_ability")
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 10; ++i)
         {
-            StatusType res1 = obj->add_player(1, 4, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(4000+i, 4, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
         res = obj->add_team(3);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 10; ++i)
         {
-            StatusType res1 = obj->add_player(1, 3, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(3000+i, 3, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
         res = obj->add_team(2);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 40; ++i)
         {
-            StatusType res1 = obj->add_player(1, 2, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(2000+i, 2, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
         res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         for (int i = 1; i <= 50; ++i)
         {
-            StatusType res1 = obj->add_player(1, 1, permutation_t::neutral(), 1, 1, 1, true);;
+            StatusType res1 = obj->add_player(1000+i, 1, permutation_t::neutral(), 1, 1, 1, true);;
             REQUIRE(res1 == StatusType::SUCCESS);
         }
         output_t<int> res0 = obj->get_ith_pointless_ability(0);
@@ -2112,7 +2129,7 @@ TEST_CASE("get_partial_spirit")
 {
     SECTION("simple partial spirit")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -2133,7 +2150,7 @@ TEST_CASE("get_partial_spirit")
 
     SECTION("not positive id")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         output_t<permutation_t> res1 = obj->get_partial_spirit(-69);
         REQUIRE(res1.status() == StatusType::INVALID_INPUT);
@@ -2149,7 +2166,7 @@ TEST_CASE("get_partial_spirit")
 
     SECTION("player doesnt exist")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         output_t<permutation_t> res1 = obj->get_partial_spirit(40);
         REQUIRE(res1.status() == StatusType::FAILURE);
@@ -2165,7 +2182,7 @@ TEST_CASE("get_partial_spirit")
 
     SECTION("player is deposed")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -2210,7 +2227,7 @@ TEST_CASE("get_partial_spirit")
 
     SECTION("many partial spirits")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -2291,7 +2308,7 @@ TEST_CASE("buy_team")
 {
     SECTION("simple buy team")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -2301,7 +2318,7 @@ TEST_CASE("buy_team")
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(2001, 2, permutation_t::neutral(), 0, 14, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->buy_team(1,2);
+        res = obj->buy_team(1, 2);
         REQUIRE(res == StatusType::SUCCESS);
 
         delete obj;
@@ -2309,7 +2326,7 @@ TEST_CASE("buy_team")
 
     SECTION("empty teams")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_team(2);
@@ -2328,11 +2345,11 @@ TEST_CASE("buy_team")
         res = obj->add_player(2001, 2, permutation_t::neutral(), 1, 1, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
 
-        res = obj->buy_team(1,3);
+        res = obj->buy_team(1, 3);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->buy_team(4,2);
+        res = obj->buy_team(4, 2);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->buy_team(5,6);
+        res = obj->buy_team(5, 6);
         REQUIRE(res == StatusType::SUCCESS);
 
 
@@ -2341,19 +2358,19 @@ TEST_CASE("buy_team")
 
     SECTION("id are equal")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_team(2);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->buy_team(1,1);
+        res = obj->buy_team(1, 1);
         REQUIRE(res == StatusType::INVALID_INPUT);
-        res = obj->buy_team(2,2);
+        res = obj->buy_team(2, 2);
         REQUIRE(res == StatusType::INVALID_INPUT);
-        res = obj->buy_team(1,2);
+        res = obj->buy_team(1, 2);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->buy_team(1,1);
+        res = obj->buy_team(1, 1);
         REQUIRE(res == StatusType::INVALID_INPUT);
 
         delete obj;
@@ -2361,22 +2378,22 @@ TEST_CASE("buy_team")
 
     SECTION("id negative")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_team(2);
         REQUIRE(res == StatusType::SUCCESS);
 
-        res = obj->buy_team(-1,1);
+        res = obj->buy_team(-1, 1);
         REQUIRE(res == StatusType::INVALID_INPUT);
-        res = obj->buy_team(1,-1);
+        res = obj->buy_team(1, -1);
         REQUIRE(res == StatusType::INVALID_INPUT);
-        res = obj->buy_team(2,0);
+        res = obj->buy_team(2, 0);
         REQUIRE(res == StatusType::INVALID_INPUT);
-        res = obj->buy_team(0,2);
+        res = obj->buy_team(0, 2);
         REQUIRE(res == StatusType::INVALID_INPUT);
-        res = obj->buy_team(2,1);
+        res = obj->buy_team(2, 1);
         REQUIRE(res == StatusType::SUCCESS);
 
         delete obj;
@@ -2384,28 +2401,28 @@ TEST_CASE("buy_team")
 
     SECTION("team does not exist")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_team(2);
         REQUIRE(res == StatusType::SUCCESS);
 
-        res = obj->buy_team(3,1);
+        res = obj->buy_team(3, 1);
         REQUIRE(res == StatusType::FAILURE);
-        res = obj->buy_team(1,4);
+        res = obj->buy_team(1, 4);
         REQUIRE(res == StatusType::FAILURE);
         res = obj->remove_team(2);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->buy_team(2,1);
+        res = obj->buy_team(2, 1);
         REQUIRE(res == StatusType::FAILURE);
-        res = obj->buy_team(1,2);
+        res = obj->buy_team(1, 2);
         REQUIRE(res == StatusType::FAILURE);
         res = obj->remove_team(1);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->buy_team(2,1);
+        res = obj->buy_team(2, 1);
         REQUIRE(res == StatusType::FAILURE);
-        res = obj->buy_team(1,2);
+        res = obj->buy_team(1, 2);
         REQUIRE(res == StatusType::FAILURE);
 
         delete obj;
@@ -2413,7 +2430,7 @@ TEST_CASE("buy_team")
 
     SECTION("buy new removed team")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -2439,7 +2456,7 @@ TEST_CASE("buy_team")
 
     SECTION("random teams buy")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_team(2);
@@ -2518,7 +2535,7 @@ TEST_CASE("buy_team")
 
     SECTION("play match after buying GK")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -2553,7 +2570,7 @@ TEST_CASE("buy_team")
 
     SECTION("team points after buy team")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -2672,7 +2689,7 @@ TEST_CASE("buy_team")
 
     SECTION("player games after buy teams")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -2859,7 +2876,7 @@ TEST_CASE("buy_team")
 
     SECTION("partial spirit after buy")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
@@ -2956,7 +2973,7 @@ TEST_CASE("buy_team")
         REQUIRE(res163.ans() == permutation_t::read("5,4,3,2,1"));
         output_t<permutation_t> res173 = obj->get_partial_spirit(4002);
         REQUIRE(res173.status() == StatusType::SUCCESS);
-        REQUIRE(res173.ans() == permutation_t::read("5,1,4,2,3").inv());
+        REQUIRE(res173.ans() == permutation_t::read("5,1,4,2,3"));
         output_t<permutation_t> res183 = obj->get_partial_spirit(5001);
         REQUIRE(res183.status() == StatusType::SUCCESS);
         REQUIRE(res183.ans() == permutation_t::read("5,1,4,2,3"));
@@ -2967,7 +2984,7 @@ TEST_CASE("buy_team")
 
     SECTION("ith ability after buy teams")
     {
-        world_cup_t *obj = new world_cup_t();
+        world_cup_t* obj = new world_cup_t();
 
         StatusType res = obj->add_team(1);
         REQUIRE(res == StatusType::SUCCESS);
