@@ -1,4 +1,4 @@
-define CATCH_CONFIG_MAIN
+#define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
 #include "wet2util_override.h"
@@ -8,6 +8,7 @@ define CATCH_CONFIG_MAIN
 #include <sstream>
 #include <vector>
 #include <stdlib.h>
+
 
 using namespace std;
 
@@ -2504,15 +2505,15 @@ TEST_CASE("buy_team")
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(7001, 7, permutation_t::neutral(), 1, 1, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(7001, 7, permutation_t::neutral(), 1, 1, 0, true);
+        res = obj->add_player(7002, 7, permutation_t::neutral(), 1, 1, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(8001, 8, permutation_t::neutral(), 1, 1, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(8001, 8, permutation_t::neutral(), 1, 1, 0, true);
+        res = obj->add_player(8002, 8, permutation_t::neutral(), 1, 1, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(8001, 8, permutation_t::neutral(), 1, 1, 0, true);
+        res = obj->add_player(8003, 8, permutation_t::neutral(), 1, 1, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(8001, 8, permutation_t::neutral(), 1, 1, 0, true);
+        res = obj->add_player(8004, 8, permutation_t::neutral(), 1, 1, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
 
         res = obj->buy_team(2, 3);
@@ -2587,7 +2588,7 @@ TEST_CASE("buy_team")
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1002, 1, permutation_t::neutral(), 1, 1, 0, false);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(2001, 2, permutation_t::neutral(), 1, 1000, 0, true);
+        res = obj->add_player(2001, 2, permutation_t::neutral(), 1, 990, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(2002, 2, permutation_t::neutral(), 1, 1, 0, false);
         REQUIRE(res == StatusType::SUCCESS);
@@ -2623,13 +2624,13 @@ TEST_CASE("buy_team")
         REQUIRE(res7.ans() == 1);
         output_t<int> res8 = obj->play_match(5, 2);
         REQUIRE(res8.status() == StatusType::SUCCESS);
-        REQUIRE(res8.ans() == 2);
+        REQUIRE(res8.ans() == 3);
         output_t<int> res9 = obj->play_match(5, 2);
         REQUIRE(res9.status() == StatusType::SUCCESS);
-        REQUIRE(res9.ans() == 2);
+        REQUIRE(res9.ans() == 3);
         output_t<int> res10 = obj->play_match(5, 2);
         REQUIRE(res10.status() == StatusType::SUCCESS);
-        REQUIRE(res10.ans() == 2);
+        REQUIRE(res10.ans() == 3);
         output_t<int> res11 = obj->play_match(3, 5);
         REQUIRE(res11.status() == StatusType::SUCCESS);
         REQUIRE(res11.ans() == 1);
@@ -2706,7 +2707,7 @@ TEST_CASE("buy_team")
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(1002, 1, permutation_t::neutral(), 1, 1, 0, false);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(2001, 2, permutation_t::neutral(), 1, 1000, 0, true);
+        res = obj->add_player(2001, 2, permutation_t::neutral(), 1, 985, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(2002, 2, permutation_t::neutral(), 1, 1, 0, false);
         REQUIRE(res == StatusType::SUCCESS);
@@ -2742,13 +2743,13 @@ TEST_CASE("buy_team")
         REQUIRE(res7.ans() == 1);
         output_t<int> res8 = obj->play_match(5, 2);
         REQUIRE(res8.status() == StatusType::SUCCESS);
-        REQUIRE(res8.ans() == 2);
+        REQUIRE(res8.ans() == 3);
         output_t<int> res9 = obj->play_match(5, 2);
         REQUIRE(res9.status() == StatusType::SUCCESS);
-        REQUIRE(res9.ans() == 2);
+        REQUIRE(res9.ans() == 3);
         output_t<int> res10 = obj->play_match(5, 2);
         REQUIRE(res10.status() == StatusType::SUCCESS);
-        REQUIRE(res10.ans() == 2);
+        REQUIRE(res10.ans() == 3);
         output_t<int> res11 = obj->play_match(3, 5);
         REQUIRE(res11.status() == StatusType::SUCCESS);
         REQUIRE(res11.ans() == 1);
@@ -2761,16 +2762,16 @@ TEST_CASE("buy_team")
 
         output_t<int> res14 = obj->num_played_games_for_player(1002);
         REQUIRE(res14.status() == StatusType::SUCCESS);
-        REQUIRE(res14.ans() == 7);
+        REQUIRE(res14.ans() == 8);
         output_t<int> res15 = obj->num_played_games_for_player(2002);
         REQUIRE(res15.status() == StatusType::SUCCESS);
-        REQUIRE(res15.ans() == 3);
+        REQUIRE(res15.ans() == 5);
         output_t<int> res16 = obj->num_played_games_for_player(3001);
         REQUIRE(res16.status() == StatusType::SUCCESS);
-        REQUIRE(res16.ans() == 1);
+        REQUIRE(res16.ans() == 2);
         output_t<int> res17 = obj->num_played_games_for_player(4001);
         REQUIRE(res17.status() == StatusType::SUCCESS);
-        REQUIRE(res17.ans() == 2);
+        REQUIRE(res17.ans() == 3);
         output_t<int> res18 = obj->num_played_games_for_player(5001);
         REQUIRE(res18.status() == StatusType::SUCCESS);
         REQUIRE(res18.ans() == 13);
@@ -2780,20 +2781,20 @@ TEST_CASE("buy_team")
 
         output_t<int> res19 = obj->num_played_games_for_player(1002);
         REQUIRE(res19.status() == StatusType::SUCCESS);
-        REQUIRE(res19.ans() == 7);
+        REQUIRE(res19.ans() == 8);
         output_t<int> res20 = obj->num_played_games_for_player(2002);
         REQUIRE(res20.status() == StatusType::SUCCESS);
-        REQUIRE(res20.ans() == 3);
+        REQUIRE(res20.ans() == 5);
 
         res = obj->buy_team(3, 4);
         REQUIRE(res == StatusType::SUCCESS);
 
         output_t<int> res21 = obj->num_played_games_for_player(3001);
         REQUIRE(res21.status() == StatusType::SUCCESS);
-        REQUIRE(res21.ans() == 1);
+        REQUIRE(res21.ans() == 2);
         output_t<int> res22 = obj->num_played_games_for_player(4001);
         REQUIRE(res22.status() == StatusType::SUCCESS);
-        REQUIRE(res22.ans() == 2);
+        REQUIRE(res22.ans() == 3);
 
         output_t<int> res23_1 = obj->play_match(3, 1);
         REQUIRE(res23_1.status() == StatusType::SUCCESS);
@@ -2805,16 +2806,16 @@ TEST_CASE("buy_team")
 
         output_t<int> res23_3 = obj->num_played_games_for_player(1002);
         REQUIRE(res23_3.status() == StatusType::SUCCESS);
-        REQUIRE(res23_3.ans() == 8);
+        REQUIRE(res23_3.ans() == 9);
         output_t<int> res23_4 = obj->num_played_games_for_player(2002);
         REQUIRE(res23_4.status() == StatusType::SUCCESS);
-        REQUIRE(res23_4.ans() == 4);
+        REQUIRE(res23_4.ans() == 6);
         output_t<int> res23_5 = obj->num_played_games_for_player(3001);
         REQUIRE(res23_5.status() == StatusType::SUCCESS);
-        REQUIRE(res23_5.ans() == 3);
+        REQUIRE(res23_5.ans() == 4);
         output_t<int> res23_6 = obj->num_played_games_for_player(4001);
         REQUIRE(res23_6.status() == StatusType::SUCCESS);
-        REQUIRE(res23_6.ans() == 4);
+        REQUIRE(res23_6.ans() == 5);
         output_t<int> res23_7 = obj->num_played_games_for_player(5001);
         REQUIRE(res23_7.status() == StatusType::SUCCESS);
         REQUIRE(res23_7.ans() == 14);
@@ -2824,10 +2825,10 @@ TEST_CASE("buy_team")
 
         output_t<int> res23 = obj->num_played_games_for_player(3001);
         REQUIRE(res23.status() == StatusType::SUCCESS);
-        REQUIRE(res23.ans() == 3);
+        REQUIRE(res23.ans() == 4);
         output_t<int> res24 = obj->num_played_games_for_player(4001);
         REQUIRE(res24.status() == StatusType::SUCCESS);
-        REQUIRE(res24.ans() == 4);
+        REQUIRE(res24.ans() == 5);
         output_t<int> res25 = obj->num_played_games_for_player(5001);
         REQUIRE(res25.status() == StatusType::SUCCESS);
         REQUIRE(res25.ans() == 14);
@@ -2838,16 +2839,16 @@ TEST_CASE("buy_team")
 
         output_t<int> res25_3 = obj->num_played_games_for_player(1002);
         REQUIRE(res25_3.status() == StatusType::SUCCESS);
-        REQUIRE(res25_3.ans() == 9);
+        REQUIRE(res25_3.ans() == 10);
         output_t<int> res25_4 = obj->num_played_games_for_player(2002);
         REQUIRE(res25_4.status() == StatusType::SUCCESS);
-        REQUIRE(res25_4.ans() == 5);
+        REQUIRE(res25_4.ans() == 7);
         output_t<int> res25_5 = obj->num_played_games_for_player(3001);
         REQUIRE(res25_5.status() == StatusType::SUCCESS);
-        REQUIRE(res25_5.ans() == 4);
+        REQUIRE(res25_5.ans() == 5);
         output_t<int> res25_6 = obj->num_played_games_for_player(4001);
         REQUIRE(res25_6.status() == StatusType::SUCCESS);
-        REQUIRE(res25_6.ans() == 5);
+        REQUIRE(res25_6.ans() == 6);
         output_t<int> res25_7 = obj->num_played_games_for_player(5001);
         REQUIRE(res25_7.status() == StatusType::SUCCESS);
         REQUIRE(res25_7.ans() == 15);
@@ -2857,16 +2858,16 @@ TEST_CASE("buy_team")
 
         output_t<int> res26 = obj->num_played_games_for_player(1002);
         REQUIRE(res26.status() == StatusType::SUCCESS);
-        REQUIRE(res26.ans() == 9);
+        REQUIRE(res26.ans() == 10);
         output_t<int> res27 = obj->num_played_games_for_player(2002);
         REQUIRE(res27.status() == StatusType::SUCCESS);
-        REQUIRE(res27.ans() == 5);
+        REQUIRE(res27.ans() == 7);
         output_t<int> res28 = obj->num_played_games_for_player(3001);
         REQUIRE(res28.status() == StatusType::SUCCESS);
-        REQUIRE(res28.ans() == 4);
+        REQUIRE(res28.ans() == 5);
         output_t<int> res29 = obj->num_played_games_for_player(4001);
         REQUIRE(res29.status() == StatusType::SUCCESS);
-        REQUIRE(res29.ans() == 5);
+        REQUIRE(res29.ans() == 6);
         output_t<int> res30 = obj->num_played_games_for_player(5001);
         REQUIRE(res30.status() == StatusType::SUCCESS);
         REQUIRE(res30.ans() == 15);
