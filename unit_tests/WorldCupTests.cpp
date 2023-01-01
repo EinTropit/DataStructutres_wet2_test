@@ -2,7 +2,7 @@
 
 #include "catch.hpp"
 #include "wet2util_override.h"
-#include "../your_files/worldcup23a2.h"
+#include "../worldcup23a2.h"
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -2504,15 +2504,15 @@ TEST_CASE("buy_team")
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(7001, 7, permutation_t::neutral(), 1, 1, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(7001, 7, permutation_t::neutral(), 1, 1, 0, true);
+        res = obj->add_player(7002, 7, permutation_t::neutral(), 1, 1, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
         res = obj->add_player(8001, 8, permutation_t::neutral(), 1, 1, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(8001, 8, permutation_t::neutral(), 1, 1, 0, true);
+        res = obj->add_player(8002, 8, permutation_t::neutral(), 1, 1, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(8001, 8, permutation_t::neutral(), 1, 1, 0, true);
+        res = obj->add_player(8003, 8, permutation_t::neutral(), 1, 1, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(8001, 8, permutation_t::neutral(), 1, 1, 0, true);
+        res = obj->add_player(8004, 8, permutation_t::neutral(), 1, 1, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
 
         res = obj->buy_team(2, 3);
@@ -2623,20 +2623,20 @@ TEST_CASE("buy_team")
         REQUIRE(res7.ans() == 1);
         output_t<int> res8 = obj->play_match(5, 2);
         REQUIRE(res8.status() == StatusType::SUCCESS);
-        REQUIRE(res8.ans() == 2);
+        REQUIRE(res8.ans() == 3);
         output_t<int> res9 = obj->play_match(5, 2);
         REQUIRE(res9.status() == StatusType::SUCCESS);
-        REQUIRE(res9.ans() == 2);
+        REQUIRE(res9.ans() == 3);
         output_t<int> res10 = obj->play_match(5, 2);
         REQUIRE(res10.status() == StatusType::SUCCESS);
-        REQUIRE(res10.ans() == 2);
+        REQUIRE(res10.ans() == 3);
         output_t<int> res11 = obj->play_match(3, 5);
         REQUIRE(res11.status() == StatusType::SUCCESS);
         REQUIRE(res11.ans() == 1);
         output_t<int> res12 = obj->play_match(4, 5);
         REQUIRE(res12.status() == StatusType::SUCCESS);
         REQUIRE(res12.ans() == 1);
-        output_t<int> res13 = obj->play_match(4, 2);
+        output_t<int> res13 = obj->play_match(4, 5);
         REQUIRE(res13.status() == StatusType::SUCCESS);
         REQUIRE(res13.ans() == 1);
 
@@ -2702,21 +2702,21 @@ TEST_CASE("buy_team")
         res = obj->add_team(5);
         REQUIRE(res == StatusType::SUCCESS);
 
-        res = obj->add_player(1001, 1, permutation_t::neutral(), 1, 1000, 0, true);
+        res = obj->add_player(1001, 1, permutation_t::neutral(), 0, 1000, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(1002, 1, permutation_t::neutral(), 1, 1, 0, false);
+        res = obj->add_player(1002, 1, permutation_t::neutral(), 0, 1, 0, false);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(2001, 2, permutation_t::neutral(), 1, 1000, 0, true);
+        res = obj->add_player(2001, 2, permutation_t::neutral(), 0, 1000, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(2002, 2, permutation_t::neutral(), 1, 1, 0, false);
+        res = obj->add_player(2002, 2, permutation_t::neutral(), 0, 1, 0, false);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(3001, 3, permutation_t::neutral(), 1, 20000, 0, true);
+        res = obj->add_player(3001, 3, permutation_t::neutral(), 0, 20000, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(4001, 4, permutation_t::neutral(), 1, 1, 0, true);
+        res = obj->add_player(4001, 4, permutation_t::neutral(), 0, 1, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(4002, 4, permutation_t::neutral(), 1, 1000, 0, true);
+        res = obj->add_player(4002, 4, permutation_t::neutral(), 0, 1000, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
-        res = obj->add_player(5001, 5, permutation_t::neutral(), 1, 0, 0, true);
+        res = obj->add_player(5001, 5, permutation_t::neutral(), 0, 0, 0, true);
         REQUIRE(res == StatusType::SUCCESS);
 
         output_t<int> res1 = obj->play_match(1, 5);
@@ -2742,20 +2742,20 @@ TEST_CASE("buy_team")
         REQUIRE(res7.ans() == 1);
         output_t<int> res8 = obj->play_match(5, 2);
         REQUIRE(res8.status() == StatusType::SUCCESS);
-        REQUIRE(res8.ans() == 2);
+        REQUIRE(res8.ans() == 3);
         output_t<int> res9 = obj->play_match(5, 2);
         REQUIRE(res9.status() == StatusType::SUCCESS);
-        REQUIRE(res9.ans() == 2);
+        REQUIRE(res9.ans() == 3);
         output_t<int> res10 = obj->play_match(5, 2);
         REQUIRE(res10.status() == StatusType::SUCCESS);
-        REQUIRE(res10.ans() == 2);
+        REQUIRE(res10.ans() == 3);
         output_t<int> res11 = obj->play_match(3, 5);
         REQUIRE(res11.status() == StatusType::SUCCESS);
         REQUIRE(res11.ans() == 1);
         output_t<int> res12 = obj->play_match(4, 5);
         REQUIRE(res12.status() == StatusType::SUCCESS);
         REQUIRE(res12.ans() == 1);
-        output_t<int> res13 = obj->play_match(4, 2);
+        output_t<int> res13 = obj->play_match(4, 5);
         REQUIRE(res13.status() == StatusType::SUCCESS);
         REQUIRE(res13.ans() == 1);
 
