@@ -45,7 +45,7 @@ then
 fi
 
 
-if [ "$run_var" == "y" ]
+if [ "$del_var" == "y" ]
 then
     if [ -e ./unit_test_exec ]
     then
