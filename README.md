@@ -4,5 +4,6 @@
 * Clone / Download the files from the repository
 * Put all your .h and .cpp files in the folder with the sh file
 * Then in the teminal: 
- * run: ./unit_test_runner.sh
- * choose your desired way of running with the provided options.
+  - If the premission is denied write: chmod +x ./unit_test_runner.sh
+  - Run: ./unit_test_runner.sh
+  - Choose your desired way of running with the provided options: y - yes, n - no
